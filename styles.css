@@ -40,12 +40,20 @@ body, html {
     height: 100%;
 }
 
-#container img{
+#container > img{
     position: absolute;
     top: 50%;
     left: 0;
     width: 25%;
 }
+
+#manual{
+    position: absolute;
+    top: 0;
+    right: 45px;
+    width: 20%;
+}
+
 #startButton{
     position: absolute;
     background-color: rgba(255, 50, 50, 0.5);
@@ -59,6 +67,36 @@ body, html {
     animation: botonStart 1s infinite;
     transition: all 1s ease-out;
     z-index: 2;
+}
+
+.controles{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    margin-left: -80px;
+}
+
+.controles img{
+    position: relative;
+    width: 250px;
+    margin-bottom: -50px;
+}
+
+.teclas{
+    display: block;
+    text-align: center;
+}
+
+h2, p{
+    margin: 0;
+}
+
+.teclas p{
+    font-weight: bold;
 }
 
 @keyframes botonStart{
