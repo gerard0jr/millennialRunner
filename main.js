@@ -133,7 +133,7 @@ function Character(posX,posY,nombre,charColor){
     } 
 
     this.turnDown = () => {
-        if(frames%2 === 0){
+        if(frames%4 === 0){
             frameRight++
                 switch(frameRight){
                     case 0:
@@ -172,7 +172,7 @@ function Character(posX,posY,nombre,charColor){
             }
     }
     this.turnUp = () => {
-        if(frames%2 === 0){
+        if(frames%4 === 0){
             frameLeft ++
                 switch(frameLeft){  
                     case 0:
@@ -212,7 +212,7 @@ function Character(posX,posY,nombre,charColor){
     }
 
     this.turnLeft = () => {
-        if(frames%2 === 0){
+        if(frames%4 === 0){
             frameLeft ++
                 switch(frameLeft){
                     case 0:
@@ -253,7 +253,7 @@ function Character(posX,posY,nombre,charColor){
     }
 
     this.turnRight = () => {
-        if(frames%2 === 0){
+        if(frames%4 === 0){
         frameRight++
             switch(frameRight){
                 case 0:
