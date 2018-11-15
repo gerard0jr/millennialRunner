@@ -83,6 +83,10 @@ var powerProperties = [
 var obstacles = []
 var powerUps = []
 
+var cover = document.getElementById('cover')
+var canvasContainer = document.getElementById('container')
+var startButton = document.getElementById('startButton')
+
 //clases
 function Board(){
     this.x = 0
@@ -526,8 +530,8 @@ function gameOver(){
     ctx.fillStyle = "white" 
     ctx.fillText("GAME OVER", 100,400) 
     ctx.font = "30px monospace" 
-    ctx.fillText("Perdedor:", 110,500) 
-    ctx.fillText(loser+  " 👎🏻", 110,550) 
+    ctx.fillText("Perdedor:", 110,450) 
+    ctx.fillText(loser+  " 👎🏻", 110,500) 
 }
 
 //aux functions
@@ -609,6 +613,11 @@ function checkPowerCol(){
 }
 
 //listeners
+
+startButton.addEventListener("click",function(){
+    cover.style.opacity = "0"
+})
+
 addEventListener('keyup',function(e){
 
     switch(e.keyCode){
@@ -669,6 +678,7 @@ addEventListener("keyup", function(){
 addEventListener("keypress",function(e){
     switch(e.keyCode){
         case 13:{
+
             start()
         }
         return

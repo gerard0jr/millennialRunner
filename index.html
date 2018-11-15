@@ -8,8 +8,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="container">
-        <canvas id="game" width="500" height="700"></canvas>
+    <div id="main">
+        <div id="cover">
+            <img src="backgroundCover.png">
+            <button id = "startButton"> 
+                JUGAR 
+            </button>
+        </div>
+        <div id="container">
+            <img src="couple.png" alt="">
+            <canvas id="game" width="500" height="650"></canvas>
+            <div id="manual">
+                <h1>Instrucciones:</h1>
+                <p>¡Ustedes son millennials!</p>
+                <p>El primero que sea atrapado por un bebé, perderá el rumbo de su vida sin un fin específico (GAME OVER)</p>
+                <p>¡No dejes que la independencia de tus padres o un compromiso con alguien te detenga!</p>
+            </div>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>

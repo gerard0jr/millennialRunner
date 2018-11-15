@@ -3,21 +3,80 @@ body, html {
     padding: 0;
 }
 
+#main{
+ position: relative;
+ width: 100%;
+ height: 100%;
+}
+
 #container{
     width: 100%;
+    height: 100vh;
     text-align: center;
     position: relative;
     background-image: url('bkgnd.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-}
-
-#game{
-    z-index: 0;
-}
-
-#rock{
-    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 1;
-    left: 35%;
+}
+
+#cover{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    top: 0;
+    left: 0;
+    display: block;
+    z-index: 2;
+    transition: opacity 4s ease;
+}
+
+#cover img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#container img{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 25%;
+}
+#startButton{
+    position: absolute;
+    background-color: rgba(255, 50, 50, 0.5);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    border-radius: 10px;
+    bottom: 75px;
+    margin-left: 22%;
+    padding: 20px;
+    font-size: 50px;
+    animation: botonStart 1s infinite;
+    transition: all 1s ease-out;
+    z-index: 2;
+}
+
+@keyframes botonStart{
+    0%{
+        background-color: rgba(255, 50, 50, 0.5);
+        bottom: 75px;
+    
+    }
+
+    50%{
+        background-color: rgba(213, 235, 14, 0.5);
+        bottom: 85px;
+      
+    }
+
+    100%{
+        background-color: rgba(255, 50, 50, 0.5);
+        bottom: 75px;
+        
+    }
 }
