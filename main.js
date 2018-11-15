@@ -253,6 +253,7 @@ function Character(posX,posY,nombre,charColor){
     }
 
     this.turnRight = () => {
+        console.log(this.image.src)
         if(frames%4 === 0){
         frameRight++
             switch(frameRight){
