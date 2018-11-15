@@ -87,6 +87,12 @@ var cover = document.getElementById('cover')
 var canvasContainer = document.getElementById('container')
 var startButton = document.getElementById('startButton')
 
+var musica = document.createElement('audio')
+musica.src = "fondo.mp3"
+
+var iphone = document.createElement('audio')
+iphone.src = "iphone.mp3"
+
 //clases
 function Board(){
     this.x = 0
@@ -523,10 +529,12 @@ function update(){
     
 }
 function gameOver(){
+    musica.pause()
     gameOngoing = false
     clearInterval(interval)
     interval = null
-    
+    ctx.fillStyle = "gray"
+    ctx.fillRect(100,300,310,250)
     ctx.font = "50px arial" 
     ctx.fillStyle = "white" 
     ctx.fillText("GAME OVER", 100,400) 
@@ -594,6 +602,11 @@ function checkCollition(){
 function checkPowerCol(){
     for(var power of powerUps){
         if(char.isTouching(power)){
+           iphone.load()
+           iphone.play()
+           setTimeout(function(){
+               iphone.pause()
+           },1000)
            powerUps.shift()
            char.accel = 2
            setTimeout(function(){
@@ -602,6 +615,11 @@ function checkPowerCol(){
         }
 
         if(char2.isTouching(power)){
+            iphone.load()
+            iphone.play()
+            setTimeout(function(){
+                iphone.pause()
+            },1000)
             powerUps.shift()
             char2.accel = 2
             setTimeout(function(){
@@ -679,7 +697,10 @@ addEventListener("keyup", function(){
 addEventListener("keypress",function(e){
     switch(e.keyCode){
         case 13:{
-
+            if(musica.paused){
+                musica.load()
+                musica.play()
+            }
             start()
         }
         return
