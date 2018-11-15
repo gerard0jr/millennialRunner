@@ -7,6 +7,9 @@ body, html {
     width: 100%;
     text-align: center;
     position: relative;
+    background-image: url('bkgnd.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 #game{

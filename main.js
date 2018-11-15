@@ -67,7 +67,21 @@ var obstacleProperties = [
     }
 ]
 
+var powerProperties = [
+    {
+        width: 65,
+        height: 145,
+        origin: "starbucks.png"
+    },
+    {
+        width: 69,
+        height: 60,
+        origin: "maleta.png"
+    }
+]
+
 var obstacles = []
+var powerUps = []
 
 //clases
 function Board(){
@@ -98,6 +112,7 @@ function Character(posX,posY,nombre,charColor){
     this.speedX = 0
     this.speedY = 0
     this.points = 0
+    this.accel = 0
     this.image = new Image()
     this.image.src = images.ready
     this.image.onload = () => this.draw()
@@ -284,35 +299,40 @@ function Character(posX,posY,nombre,charColor){
     }
 
     this.moveRight = () => {
-        if(!checkCollition()) this.speedX += 0.1
+        if(!checkCollition()) this.speedX += 0.1 + this.accel
         else{ 
             char.x = currentObstacle.x - char.width
             char2.x = currentObstacle.x - char2.width
         }
+        if(checkPowerCol()) this.speedX ++
     }
 
     this.moveLeft = () => {
-        if(!checkCollition())  this.speedX -= 0.1
+        if(!checkCollition())  this.speedX -= 0.1 + this.accel
         else{ 
             char.x = currentObstacle.x + currentObstacle.width
             char2.x = currentObstacle.x + currentObstacle.width
         }
+        if(checkPowerCol()) this.speedX --
     }
 
     this.moveUp = () => {
-        if(!checkCollition()) this.speedY -= 0.1
+        if(!checkCollition()) this.speedY -= 0.1 + this.accel
         else {
             char.y = currentObstacle.y + currentObstacle.height
             char2.y = currentObstacle.y + currentObstacle.height
         }
+        if(checkPowerCol()) this.speedY --
     }
 
     this.moveDown = () => {
-        if(!checkCollition()) this.speedY += 0.2
+        if(!checkCollition()) this.speedY += 0.2 + this.accel
         else {
             char.y = currentObstacle.y - char.height
             char2.y = currentObstacle.y - char2.height
         }
+
+        if(checkPowerCol()) this.speedY ++
     }
 
     this.newPosX = () => {
@@ -393,6 +413,21 @@ function Obstaculo(posX,objeto,y){
     }
 }
 
+function Power(posX,objeto,y){
+    this.x = posX || 0
+    this.y = y || canvas.height
+    this.width = objeto.width
+    this.height = objeto.height
+    this.image = new Image()
+    this.image.src = objeto.origin
+    this.image.onload = () => this.draw()
+
+    this.draw = () => {
+        this.y --
+        ctx.drawImage(this.image,this.x,this.y,this.width,this.height)
+    }
+}
+
 //instances
 var bg = new Board()
 var char = new Character(175,400,"Juanpa Zurita","white")
@@ -404,6 +439,7 @@ var baby2 = new Baby(320)
 //main functions
 function start(){
     obstacles = []
+    powerUps = []
     gameOngoing = true
     frames = 0
     char = new Character(175,400,"Juanpa Zurita","white")
@@ -421,6 +457,7 @@ function update(){
     bg.draw()
     
     drawObstacles()
+    drawPower()
 
     baby.draw()
     baby.crawl()
@@ -511,6 +548,22 @@ function drawObstacles(){
     }
 }
 
+function createPower(){
+    if(frames%290===0) {
+        var randomX = Math.floor(Math.random() * 156) + 95
+        var indexPower = Math.floor(Math.random() * 2)
+        var selectedPower = powerProperties[indexPower]
+        powerUps.push(new Power(randomX,selectedPower))
+    }
+}
+
+function drawPower(){
+    createPower()
+    for(var power of powerUps){
+        power.draw()
+    }
+}
+
 function checkCollition(){
     if(char.isTouching(char2)){
         char.stopMoveY()
@@ -527,6 +580,28 @@ function checkCollition(){
            
             if(touchingBottom2)
             char2.stopMoveY()
+        }
+
+    }
+    
+}
+
+function checkPowerCol(){
+    for(var power of powerUps){
+        if(char.isTouching(power)){
+           powerUps.shift()
+           char.accel = 2
+           setTimeout(function(){
+               char.accel = 0
+           },5000)
+        }
+
+        if(char2.isTouching(power)){
+            powerUps.shift()
+            char2.accel = 2
+            setTimeout(function(){
+                char2.accel = 0
+            },5000)
         }
 
     }
