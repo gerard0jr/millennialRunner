@@ -93,6 +93,8 @@ musica.src = "fondo.mp3"
 var iphone = document.createElement('audio')
 iphone.src = "iphone.mp3"
 
+var guapuras = document.createElement('audio')
+guapuras.src = "guapuritas.m4a"
 //clases
 function Board(){
     this.x = 0
@@ -512,7 +514,11 @@ function update(){
 
     if(char.y < 100){
         loser = char.name
-         gameOver()
+        guapuras.load()
+        guapuras.play()
+        //setTimeout(guapuras.pause(),3000)
+        gameOver()
+         
         }
     if(char.y > canvas.height - char.height) char.y = canvas.height - char.height
     if(char.x < 95) char.x = 95
@@ -520,7 +526,11 @@ function update(){
 
     if(char2.y < 100) {
         loser = char2.name
+        guapuras.load()
+        guapuras.play()
         gameOver()
+
+        
     }
     if(char2.y > canvas.height - char2.height) char2.y = canvas.height - char2.height
     if(char2.x < 95) char2.x = 95
